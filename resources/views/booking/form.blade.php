@@ -3,7 +3,7 @@
 @section('title', 'Бронирование коньков')
 
 @section('content')
-    <div class="container pt-6 pb-6">
+    <div class="container py-6">
         <div class="booking-container">
             <h1 class="booking-title">Бронирование коньков</h1>
             
@@ -54,7 +54,7 @@
                         </label>
                     </div>
 
-                    <div id="skatesSelection" style="display: {{ old('with_skates') ? 'block' : 'none' }};">
+                    <div id="skatesSelection" class="skates-selection" style="display: {{ old('with_skates') ? 'block' : 'none' }};">
                         <div class="form-group">
                             <label class="form-label" for="skate_id">Выберите коньки</label>
                             <select class="form-control @error('skate_id') is-invalid @enderror" 
