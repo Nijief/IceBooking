@@ -2,24 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Skate;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
+        $skates = [
+            ['brand' => 'Bauer', 'model' => 'RT', 'size' => 42, 'quantity' => 5],
+            ['brand' => 'CCM', 'model' => 'GFFF', 'size' => 44, 'quantity' => 3],
+            ['brand' => 'Graf', 'model' => 'Gift', 'size' => 40, 'quantity' => 4],
+            ['brand' => 'Bauer', 'model' => 'Boost', 'size' => 43, 'quantity' => 2],
+            ['brand' => 'CCM', 'model' => 'Light', 'size' => 45, 'quantity' => 3],
+            ['brand' => 'Graf', 'model' => 'Cobra', 'size' => 41, 'quantity' => 4],
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        foreach ($skates as $skate) {
+            Skate::create(array_merge($skate, [
+                'price_per_hour' => 150,
+                'is_available' => true
+            ]));
+        }
     }
 }
