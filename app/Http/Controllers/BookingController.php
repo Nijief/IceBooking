@@ -33,7 +33,7 @@ class BookingController extends Controller
             'phone' => 'required|string|max:20',
             'hours' => 'required|in:1,2,3,4',
             'with_skates' => 'boolean',
-            'skate_id' => 'required_if:with_skates,1|exists:skates,id',
+            'skate_id' => 'nullable|required_if:with_skates,1|exists:skates,id',
         ]);
 
         if ($validator->fails()) {
