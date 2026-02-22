@@ -11,6 +11,8 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\Skate\SkateResource;
+use App\MoonShine\Resources\Booking\BookingResource;
+use App\MoonShine\Resources\Ticket\TicketResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -31,6 +33,8 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuItem::make(SkateResource::class, 'Skates'),
+            MenuItem::make(BookingResource::class, 'Bookings'),
+            MenuItem::make(TicketResource::class, 'Tickets'),
         ];
     }
 

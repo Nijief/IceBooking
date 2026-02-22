@@ -5,18 +5,13 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Skate\Pages;
 
 use MoonShine\Laravel\Pages\Crud\DetailPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use App\MoonShine\Resources\Skate\SkateResource;
-use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
-use Throwable;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Image;
+use MoonShine\UI\Fields\Switcher;
 
-
-/**
- * @extends DetailPage<SkateResource>
- */
 class SkateDetailPage extends DetailPage
 {
     /**
@@ -26,54 +21,13 @@ class SkateDetailPage extends DetailPage
     {
         return [
             ID::make(),
-        ];
-    }
-
-    protected function buttons(): ListOf
-    {
-        return parent::buttons();
-    }
-
-    /**
-     * @param  TableBuilder  $component
-     *
-     * @return TableBuilder
-     */
-    protected function modifyDetailComponent(ComponentContract $component): ComponentContract
-    {
-        return $component;
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function topLayer(): array
-    {
-        return [
-            ...parent::topLayer()
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function mainLayer(): array
-    {
-        return [
-            ...parent::mainLayer()
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function bottomLayer(): array
-    {
-        return [
-            ...parent::bottomLayer()
+            Text::make('Бренд', 'brand'),
+            Text::make('Модель', 'model'),
+            Number::make('Размер', 'size'),
+            Number::make('Количество', 'quantity'),
+            Number::make('Цена за час', 'price_per_hour'),
+            Image::make('Изображение', 'image')->disk('public'),
+            Switcher::make('Доступно', 'is_available'),
         ];
     }
 }

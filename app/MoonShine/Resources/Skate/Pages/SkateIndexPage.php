@@ -9,12 +9,15 @@ use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Image;
+use MoonShine\UI\Fields\Switcher;
 use App\MoonShine\Resources\Skate\SkateResource;
 use MoonShine\Support\ListOf;
 use Throwable;
-
 
 /**
  * @extends IndexPage<SkateResource>
@@ -29,12 +32,19 @@ class SkateIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
+            ID::make()->sortable(),
+            Text::make('Бренд', 'brand')->sortable(),
+            Text::make('Модель', 'model')->sortable(),
+            Number::make('Размер', 'size')->sortable(),
+            Number::make('Количество', 'quantity')->sortable(),
+            Number::make('Цена за час', 'price_per_hour')->sortable(),
+            Image::make('Изображение', 'image')->disk('public'),
+            Switcher::make('Доступно', 'is_available')->sortable(),
         ];
     }
 
     /**
-     * @return ListOf<ActionButtonContract>
+     * @return ListOf<\MoonShine\UI\Components\ActionButton>
      */
     protected function buttons(): ListOf
     {
@@ -46,7 +56,11 @@ class SkateIndexPage extends IndexPage
      */
     protected function filters(): iterable
     {
-        return [];
+        return [
+            Text::make('Бренд', 'brand'),
+            Number::make('Размер', 'size'),
+            Switcher::make('Доступно', 'is_available'),
+        ];
     }
 
     /**
@@ -54,7 +68,16 @@ class SkateIndexPage extends IndexPage
      */
     protected function queryTags(): array
     {
-        return [];
+        return [
+            QueryTag::make(
+                'В наличии',
+                fn($query) => $query->where('quantity', '>', 0)->where('is_available', true)
+            ),
+            QueryTag::make(
+                'Нет в наличии',
+                fn($query) => $query->where('quantity', '=', 0)->orWhere('is_available', false)
+            ),
+        ];
     }
 
     /**
@@ -62,49 +85,22 @@ class SkateIndexPage extends IndexPage
      */
     protected function metrics(): array
     {
-        return [];
+        return [
+            ValueMetric::make('Всего коньков')
+                ->value(fn() => $this->getResource()->getModel()::count()),
+            ValueMetric::make('В наличии')
+                ->value(fn() => $this->getResource()->getModel()::where('quantity', '>', 0)->count()),
+        ];
     }
 
     /**
      * @param  TableBuilder  $component
-     *
      * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function topLayer(): array
-    {
-        return [
-            ...parent::topLayer()
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function mainLayer(): array
-    {
-        return [
-            ...parent::mainLayer()
-        ];
-    }
-
-    /**
-     * @return list<ComponentContract>
-     * @throws Throwable
-     */
-    protected function bottomLayer(): array
-    {
-        return [
-            ...parent::bottomLayer()
-        ];
+        return $component
+            ->reindex()
+            ->withAttributes(['class' => 'w-full']);
     }
 }
