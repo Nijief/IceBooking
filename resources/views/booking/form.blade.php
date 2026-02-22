@@ -50,7 +50,7 @@
                             <input type="checkbox" name="with_skates" value="1" 
                                    {{ old('with_skates') ? 'checked' : '' }}
                                    onchange="toggleSkatesSelection(this.checked)">
-                            <span>Нужны коньки (приду со своими)</span>
+                            <span>Нужны коньки</span>
                         </label>
                     </div>
 

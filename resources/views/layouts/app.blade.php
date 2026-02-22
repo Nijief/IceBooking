@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <div class="logo-icon">⛸️</div>
+                <div class="logo-icon"></div>
                 <a href="/" class="logo-text">Ice Arena</a>
             </div>
             
@@ -19,7 +19,6 @@
                 <a href="/" class="nav-link">Главная</a>
                 <a href="#prices" class="nav-link">Цены</a>
                 <a href="#skates" class="nav-link">Коньки</a>
-                <a href="#contacts" class="nav-link">Контакты</a>
             </nav>
 
             <div class="header-actions">
