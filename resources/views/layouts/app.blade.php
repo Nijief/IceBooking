@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <div class="logo-icon"></div>
+                <div class="logo-icon"><img src="https://png.pngtree.com/png-vector/20241204/ourmid/pngtree-blue-iceberg-clipart-with-white-background-png-image_14587369.png" alt=""></div>
                 <a href="/" class="logo-text">Ice Arena</a>
             </div>
             

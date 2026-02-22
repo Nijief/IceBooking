@@ -41,7 +41,6 @@ body {
 /* Header Styles */
 .header {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -72,6 +71,11 @@ body {
     color: white;
     font-weight: bold;
     font-size: 20px;
+}
+
+.logo-icon img {
+    height: 30px;
+    width: auto;
 }
 
 .logo-text {
@@ -581,30 +585,6 @@ body {
 .py-10 {
     padding-top: calc(var(--spacing-unit) * 10);
     padding-bottom: calc(var(--spacing-unit) * 10);
-}
-
-.mb-2 {
-    margin-bottom: calc(var(--spacing-unit) * 2);
-}
-
-.mb-3 {
-    margin-bottom: calc(var(--spacing-unit) * 3);
-}
-
-.mb-4 {
-    margin-bottom: calc(var(--spacing-unit) * 4);
-}
-
-.mb-5 {
-    margin-bottom: calc(var(--spacing-unit) * 5);
-}
-
-.mb-8 {
-    margin-bottom: calc(var(--spacing-unit) * 8);
-}
-
-.mr-4 {
-    margin-right: calc(var(--spacing-unit) * 4);
 }
 
 /* Card with centered text */
